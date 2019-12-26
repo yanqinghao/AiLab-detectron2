@@ -22,6 +22,8 @@ WORKDIR /workspace
 
 ENV PYPI_MIRROR "https://mirrors.aliyun.com/pypi/simple"
 
+RUN apt-get update -y && apt-get install git -y
+
 RUN pip config set global.index-url ${PYPI_MIRROR}
 
 RUN pip install --upgrade pip
