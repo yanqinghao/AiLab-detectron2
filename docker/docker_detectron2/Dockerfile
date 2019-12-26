@@ -28,13 +28,15 @@ RUN pip install --upgrade pip
 
 COPY --from=builder /build /workspace
 
-RUN pip install ./whl/cu100/torch-1.2.0-cp37-cp37m-manylinux1_x86_64.whl
+RUN pip install ./whl/cpu/torch-1.3.1+cpu-cp37-cp37m-linux_x86_64.whl
 
-RUN pip install ./whl/cu100/torchvision-0.4.0-cp37-cp37m-manylinux1_x86_64.whl
+RUN pip install ./whl/cpu/torchvision-0.4.2+cpu-cp37-cp37m-linux_x86_64.whl
 
 RUN rm -rf whl
 
-RUN pip install -r requirements.txt
+RUN pip install cython && pip install -r requirements.txt
+
+RUN pip install -e detectron2
 
 ENTRYPOINT [ "/sbin/my_init", "--" ]
 
