@@ -38,7 +38,7 @@ RUN rm -rf whl
 
 RUN pip install cython
 
-RUN pip install -e fvcore && pip install -e cocoapi && pip install -r requirements.txt
+RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -r requirements.txt
 
 RUN pip install -e detectron2
 
