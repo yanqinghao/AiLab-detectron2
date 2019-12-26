@@ -1,3 +1,3 @@
 #!/bin/bash
 
-pyarmor obfuscate --exclude detectron2 --recursive run.py
+pyarmor obfuscate --exclude detectron2,fvcore,cocoapi --recursive run.py
