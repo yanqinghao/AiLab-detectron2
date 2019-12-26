@@ -50,7 +50,7 @@ class CFGModel(BaseModel):
         return path
 
     def save(self, path):
-        if os.listdir(self.output) > 0:
+        if len(os.listdir(self.output)) > 0:
             storage.upload(
                 os.path.join("studio", g.userId, g.appId, g.nodeId, "model"),
                 self.output,
