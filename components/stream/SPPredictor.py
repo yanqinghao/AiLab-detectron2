@@ -21,8 +21,18 @@ def SPPredictor(context):
     logger.info("**********Use {} Device for Predicting**********".format(device))
     model.device(device)
     model.cfg.MODEL.ROI_HEADS.SCORE_THRESH_TEST = args.ScoreThreshTest
-
-    images = find_files(args.inputData)
+    fileType = (
+        ".jpg",
+        ".jpeg",
+        ".png",
+        ".ppm",
+        ".bmp",
+        ".pgm",
+        ".tif",
+        ".tiff",
+        ".webp",
+    )
+    images = find_files(args.inputData, fileType)
 
     outputs = model.predict(images)
     pred_data = []
