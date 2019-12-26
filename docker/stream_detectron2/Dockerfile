@@ -36,7 +36,7 @@ RUN pip install ./whl/cpu/torchvision-0.4.2+cpu-cp37-cp37m-linux_x86_64.whl
 
 RUN rm -rf whl
 
-RUN pip install cython && pip install -r requirements.txt
+RUN pip install cython && pip install -e fvcore && pip install -e cocoapi && pip install -r requirements.txt
 
 RUN pip install -e detectron2
 
