@@ -1,6 +1,8 @@
 ARG PYTHON_VERSION=3.6
 
-FROM registry-vpc.cn-shanghai.aliyuncs.com/shuzhi/horovod_docker_base:${PYTHON_VERSION} as builder
+ARG NAME_SPACE
+
+FROM registry-vpc.cn-shanghai.aliyuncs.com/${NAME_SPACE}/horovod_docker_base:${PYTHON_VERSION} as builder
 
 ENV PYPI_MIRROR "https://mirrors.aliyun.com/pypi/simple"
 
@@ -16,7 +18,7 @@ COPY . /build
 
 RUN bash tools/compress.sh
 
-FROM registry-vpc.cn-shanghai.aliyuncs.com/shuzhi/horovod_docker_base:${PYTHON_VERSION}
+FROM registry-vpc.cn-shanghai.aliyuncs.com/${NAME_SPACE}/horovod_docker_base:${PYTHON_VERSION}
 
 WORKDIR /workspace
 
@@ -36,9 +38,7 @@ RUN rm -rf whl
 
 RUN pip install cython
 
-RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -r requirements.txt
-
-RUN pip install -e detectron2
+RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -e detectron2 && pip install -r requirements.txt
 
 ENTRYPOINT [ "/sbin/my_init", "--" ]
 
