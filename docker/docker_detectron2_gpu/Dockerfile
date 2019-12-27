@@ -40,6 +40,6 @@ RUN pip install cython
 
 RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -e detectron2 && pip install -r requirements.txt
 
-ENTRYPOINT [ "/sbin/my_init", "--" ]
+ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
 CMD [ "bash" ]
