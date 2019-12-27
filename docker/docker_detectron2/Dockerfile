@@ -1,4 +1,4 @@
-ARG PYTHON_VERSION=3.7
+ARG PYTHON_VERSION=3.6
 
 FROM registry-vpc.cn-shanghai.aliyuncs.com/shuzhi/docker_base:${PYTHON_VERSION} as builder
 
