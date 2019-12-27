@@ -30,9 +30,9 @@ RUN pip install --upgrade pip
 
 COPY --from=builder /build /workspace
 
-RUN pip install ./whl/cpu/torch-1.3.1+cpu-cp37-cp37m-linux_x86_64.whl
+RUN pip install ./whl/cpu/torch-1.3.1+cpu-cp36-cp36m-linux_x86_64.whl
 
-RUN pip install ./whl/cpu/torchvision-0.4.2+cpu-cp37-cp37m-linux_x86_64.whl
+RUN pip install ./whl/cpu/torchvision-0.4.2+cpu-cp36-cp36m-linux_x86_64.whl
 
 RUN rm -rf whl
 

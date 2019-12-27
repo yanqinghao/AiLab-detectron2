@@ -28,9 +28,9 @@ RUN pip install --upgrade pip
 
 COPY --from=builder /build /workspace
 
-RUN pip install ./whl/cu100/torch-1.3.1+cu100-cp37-cp37m-linux_x86_64.whl
+RUN pip install ./whl/cu100/torch-1.3.1+cu100-cp36-cp36m-linux_x86_64.whl
 
-RUN pip install ./whl/cu100/torchvision-0.4.2+cu100-cp37-cp37m-linux_x86_64.whl
+RUN pip install ./whl/cu100/torchvision-0.4.2+cu100-cp36-cp36m-linux_x86_64.whl
 
 RUN rm -rf whl
 
