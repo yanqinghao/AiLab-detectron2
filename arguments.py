@@ -65,13 +65,13 @@ class CFGModel(BaseModel):
         return path
 
     def train(self):
+        trainer = DefaultTrainer(self.cfg)
+        trainer.resume_or_load(resume=False)
         if os.path.exists(self.output):
             path.remove(self.output)
             os.makedirs(self.output)
         else:
             os.makedirs(self.output)
-        trainer = DefaultTrainer(self.cfg)
-        trainer.resume_or_load(resume=False)
         trainer.train()
         return trainer
 
