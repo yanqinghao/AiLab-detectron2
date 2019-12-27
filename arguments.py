@@ -40,7 +40,8 @@ class CFGModel(BaseModel):
     def __init__(self):
         super(CFGModel, self).__init__()
         self.output = "/model"
-        os.makedirs(self.output)
+        if not os.path.exists(self.output):
+            os.makedirs(self.output)
 
     def load(self, path):
         cfg = get_cfg()
@@ -63,6 +64,11 @@ class CFGModel(BaseModel):
         return path
 
     def train(self):
+        if os.path.exists(self.output):
+            os.removedirs(self.output)
+            os.makedirs(self.output)
+        else:
+            os.makedirs(self.output)
         trainer = DefaultTrainer(self.cfg)
         trainer.resume_or_load(resume=False)
         trainer.train()
