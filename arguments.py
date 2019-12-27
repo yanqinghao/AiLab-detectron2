@@ -7,6 +7,7 @@ from suanpan.storage.arguments import Model
 from suanpan.model import Model as BaseModel
 from suanpan.storage import storage
 from suanpan.utils import image
+from suanpan import path
 from suanpan import g
 from detectron2.config import get_cfg
 from detectron2.engine import DefaultTrainer, DefaultPredictor
@@ -65,7 +66,7 @@ class CFGModel(BaseModel):
 
     def train(self):
         if os.path.exists(self.output):
-            os.removedirs(self.output)
+            path.remove(self.output)
             os.makedirs(self.output)
         else:
             os.makedirs(self.output)
