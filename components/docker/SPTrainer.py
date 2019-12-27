@@ -25,7 +25,7 @@ def SPTrainer(context):
     args = context.args
     model = args.inputModel
     device = "cuda" if args.__gpu else "cpu"
-    logger.info("**********Use {} Device for Training**********")
+    logger.info("**********Use {} Device for Training**********".format(device))
 
     trainImg = args.inputTrainImage
     trainJson = os.path.join(args.inputTrainJson, "project.json")
