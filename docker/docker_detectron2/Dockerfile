@@ -1,8 +1,8 @@
 ARG PYTHON_VERSION=3.6
 
-ARG NAME_SPACE=shuzhi-amd64
+ARG NAME_SPACE
 
-FROM registry-vpc.cn-shanghai.aliyuncs.com/${NAME_SPACE}/docker_base:${PYTHON_VERSION} as builder
+FROM registry.cn-shanghai.aliyuncs.com/${NAME_SPACE}/docker_base:${PYTHON_VERSION} as builder
 
 ENV PYPI_MIRROR "https://mirrors.aliyun.com/pypi/simple"
 
@@ -18,7 +18,7 @@ COPY . /build
 
 RUN bash tools/compress.sh
 
-FROM registry-vpc.cn-shanghai.aliyuncs.com/${NAME_SPACE}/docker_base:${PYTHON_VERSION}
+FROM registry.cn-shanghai.aliyuncs.com/${NAME_SPACE}/docker_base:${PYTHON_VERSION}
 
 WORKDIR /workspace
 
