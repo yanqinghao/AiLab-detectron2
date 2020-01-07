@@ -116,8 +116,7 @@ class CFGModel(BaseModel):
         if weight_path.split(storage.delimiter)[0] in ["studio", "common"]:
             if weight_path.split(storage.delimiter)[0] == "studio":
                 storage.download(
-                    os.path.join("studio", g.userId, g.appId, g.nodeId, "model"),
-                    self.output,
+                    weight_path, self.output,
                 )
             else:
                 storage.download(
