@@ -5,7 +5,7 @@ import os
 from suanpan.components import Result
 from suanpan.storage.arguments import Model
 from suanpan.model import Model as BaseModel
-from suanpan.storage import storage
+from suanpan.storage import storage, StorageProxy
 from suanpan.utils import image
 from suanpan import path
 from suanpan import g
@@ -115,7 +115,12 @@ class CFGModel(BaseModel):
         weight_path = self.cfg.MODEL.WEIGHTS
         if weight_path.split(storage.delimiter)[0] in ["studio", "common"]:
             if weight_path.split(storage.delimiter)[0] == "studio":
-                storage.download(
+                if storage.type == "local":
+                    storage_oss = StorageProxy(None, None)
+                    storage_oss.setBackend(type="oss")
+                else:
+                    storage_oss = storage
+                storage_oss.download(
                     weight_path, self.output,
                 )
             else:
