@@ -34,7 +34,7 @@ RUN pip install torch==1.3.1 torchvision==0.4.2
 
 RUN pip install cython
 
-RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -r requirements.txt
+RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -e detectron2 && pip install -r requirements.txt
 
 ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
