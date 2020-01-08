@@ -98,9 +98,9 @@ class CFGModel(BaseModel):
         weight_path = self.cfg.MODEL.WEIGHTS
         if weight_path.split(storage.delimiter)[0] in ["studio", "common"]:
             if weight_path.split(storage.delimiter)[0] == "studio":
-                storage.download(
-                    weight_path, self.output,
-                )
+                storage.download(weight_path, self.output)
+                if storage.type == "local":
+                    self.output = weight_path
             else:
                 if storage.type == "local":
                     storage_oss = StorageProxy(None, None)
