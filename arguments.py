@@ -2,8 +2,6 @@
 from __future__ import absolute_import, print_function
 
 import os
-from suanpan.components import Result
-from suanpan.storage.arguments import Model
 from suanpan.model import Model as BaseModel
 from suanpan.storage import storage, StorageProxy
 from suanpan.utils import image
@@ -23,7 +21,9 @@ setup_logger()
 class CFGModel(BaseModel):
     def __init__(self):
         super(CFGModel, self).__init__()
-        self.output = "/model"
+        self.output = storage.getPathInTempStore(
+            os.path.join("studio", g.userId, g.appId, g.nodeId, "model")
+        )
         if not os.path.exists(self.output):
             os.makedirs(self.output)
 
@@ -100,7 +100,7 @@ class CFGModel(BaseModel):
             if weight_path.split(storage.delimiter)[0] == "studio":
                 storage.download(weight_path, self.output)
                 if storage.type == "local":
-                    self.output = storage.storageUrl(weight_path)
+                    self.output = storage.getPathInTempStore(weight_path)
             else:
                 if storage.type == "local":
                     storage_oss = StorageProxy(None, None)
