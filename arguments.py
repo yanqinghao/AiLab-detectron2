@@ -100,7 +100,7 @@ class CFGModel(BaseModel):
             if weight_path.split(storage.delimiter)[0] == "studio":
                 storage.download(weight_path, self.output)
                 if storage.type == "local":
-                    self.output = weight_path
+                    self.output = storage.storageUrl(weight_path)
             else:
                 if storage.type == "local":
                     storage_oss = StorageProxy(None, None)
