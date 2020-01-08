@@ -19,6 +19,7 @@ from arguments import CFGModel
 @app.param(Float(key="BaseLR", default=0.00025))
 @app.param(Int(key="MaxIter", default=300))
 @app.param(Int(key="BatchSizePerImg", default=128))
+@app.param(Int(key="NumWorkers", default=4))
 @app.output(Model(key="outputModel", type=CFGModel))
 @app.output(Folder(key="outputData"))
 def SPTrainer(context):
@@ -49,6 +50,7 @@ def SPTrainer(context):
         "MAX_ITER": args.MaxIter,
         "BATCH_SIZE_PER_IMAGE": args.BatchSizePerImg,
         "NUM_CLASSES": len(classes),
+        "NUM_WORKERS": args.NumWorkers,
     }
     model.set_params(**params)
     trainer = model.train()
