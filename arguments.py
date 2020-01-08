@@ -20,23 +20,6 @@ from detectron2.utils.logger import setup_logger
 setup_logger()
 
 
-class CFG(Model):
-    FILETYPE = "cfg"
-
-    def format(self, context):
-        super(CFG, self).format(context)
-        if self.filePath:
-            cfg = get_cfg()
-            cfg.merge_from_file(self.filePath)
-            self.value = cfg
-        return self.value
-
-    def save(self, context, result):
-        with open(self.filePath, "wb") as f:
-            f.write(result.value.dump().encode("ascii"))
-        return super(CFG, self).save(context, Result.froms(value=self.filePath))
-
-
 class CFGModel(BaseModel):
     def __init__(self):
         super(CFGModel, self).__init__()
