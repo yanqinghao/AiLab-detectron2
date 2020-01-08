@@ -137,6 +137,7 @@ class CFGModel(BaseModel):
     def set_params(self, **kwd):
         self.cfg.DATASETS.TRAIN = ("dataset_train",)
         self.cfg.DATASETS.TEST = ("dataset_val",)
+        self.cfg.DATALOADER.NUM_WORKERS = kwd.pop("NUM_WORKERS")
         self.cfg.SOLVER.IMS_PER_BATCH = kwd.pop("IMS_PER_BATCH")
         self.cfg.SOLVER.BASE_LR = kwd.pop("BASE_LR")
         self.cfg.SOLVER.MAX_ITER = kwd.pop("MAX_ITER")
