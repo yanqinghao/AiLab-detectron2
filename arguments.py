@@ -21,13 +21,13 @@ setup_logger()
 class CFGModel(BaseModel):
     def __init__(self):
         super(CFGModel, self).__init__()
+
+    def load(self, path):
         self.output = storage.getPathInTempStore(
             os.path.join("studio", g.userId, g.appId, g.nodeId, "model")
         )
         if not os.path.exists(self.output):
             os.makedirs(self.output)
-
-    def load(self, path):
         cfg = get_cfg()
         cfg.merge_from_file(os.path.join(path, "model.cfg"))
         self.cfg = cfg
