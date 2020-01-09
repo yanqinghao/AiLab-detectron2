@@ -35,14 +35,15 @@ class CFGModel(BaseModel):
         return path
 
     def save(self, path):
-        if len(os.listdir(self.output)) > 0:
-            storage.upload(
-                os.path.join("studio", g.userId, g.appId, g.nodeId, "model"),
-                self.output,
-            )
-            self.cfg.MODEL.WEIGHTS = os.path.join(
-                "studio", g.userId, g.appId, g.nodeId, "model"
-            )
+        if hasattr(self, "output"):
+            if len(os.listdir(self.output)) > 0:
+                storage.upload(
+                    os.path.join("studio", g.userId, g.appId, g.nodeId, "model"),
+                    self.output,
+                )
+                self.cfg.MODEL.WEIGHTS = os.path.join(
+                    "studio", g.userId, g.appId, g.nodeId, "model"
+                )
         with open(os.path.join(path, "model.cfg"), "wb") as f:
             f.write(self.cfg.dump().encode("ascii"))
         return path
