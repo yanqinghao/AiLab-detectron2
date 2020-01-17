@@ -1,6 +1,7 @@
 # coding=utf-8
 from __future__ import absolute_import, print_function
 
+import torch
 from suanpan.app.arguments import Folder, Json, Model, Int, Float
 from suanpan.app import app
 from suanpan.log import logger
@@ -41,11 +42,24 @@ def SPPredictor(context):
     for output in outputs:
         pred_data.append(
             {
-                "image_size": output["instances"].image_size,
-                "pred_boxes": output["instances"].pred_boxes.tensor.tolist(),
-                "pred_classes": output["instances"].pred_classes.tolist(),
-                "pred_masks": output["instances"].pred_masks.tolist(),
-                "scores": output["instances"].scores.tolist(),
+                "image_size": getattr(
+                    output["instances"], "image_size", torch.tensor([])
+                ).tolist(),
+                "pred_boxes": getattr(
+                    output["instances"], "pred_boxes", torch.tensor([])
+                ).tolist(),
+                "pred_classes": getattr(
+                    output["instances"], "pred_classes", torch.tensor([])
+                ).tolist(),
+                "pred_masks": getattr(
+                    output["instances"], "pred_masks", torch.tensor([])
+                ).tolist(),
+                "scores": getattr(
+                    output["instances"], "scores", torch.tensor([])
+                ).tolist(),
+                "pred_keypoints": getattr(
+                    output["instances"], "pred_keypoints", torch.tensor([])
+                ).tolist(),
             }
         )
     return pred_data, args.outputData2
