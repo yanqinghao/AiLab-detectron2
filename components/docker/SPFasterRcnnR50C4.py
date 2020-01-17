@@ -17,8 +17,7 @@ def SPFasterRcnnR50C4(context):
         )
     else:
         args.model.load_model(
-            "./detectron2/configs/COCO-Detection/faster_rcnn_R_50_C4_3x.yaml",
-            "",
+            "./detectron2/configs/COCO-Detection/faster_rcnn_R_50_C4_3x.yaml", "",
         )
     return args.model
 
