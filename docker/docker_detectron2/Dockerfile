@@ -32,7 +32,7 @@ RUN pip install --upgrade pip
 
 COPY --from=builder /build /workspace
 
-RUN pip install torch==1.3.1+cpu torchvision==0.4.2+cpu -f https://download.pytorch.org/whl/torch_stable.html
+RUN pip install torch==1.3.1 torchvision==0.4.2
 
 RUN pip install cython
 
