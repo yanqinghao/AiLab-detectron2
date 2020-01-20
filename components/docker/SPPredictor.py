@@ -42,9 +42,7 @@ def SPPredictor(context):
     for output in outputs:
         pred_data.append(
             {
-                "image_size": getattr(
-                    output["instances"], "image_size", torch.tensor([])
-                ).tolist(),
+                "image_size": getattr(output["instances"], "image_size", ()),
                 "pred_boxes": getattr(
                     output["instances"], "pred_boxes", torch.tensor([])
                 ).tolist(),
