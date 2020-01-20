@@ -44,7 +44,9 @@ def SPPredictor(context):
             {
                 "image_size": getattr(output["instances"], "image_size", ()),
                 "pred_boxes": getattr(
-                    output["instances"], "pred_boxes", torch.tensor([])
+                    getattr(output["instances"], "pred_boxes", None),
+                    "tensor",
+                    torch.tensor([]),
                 ).tolist(),
                 "pred_classes": getattr(
                     output["instances"], "pred_classes", torch.tensor([])
