@@ -1,8 +1,8 @@
-ARG PYTHON_VERSION=3.6
+ARG PYTHON_VERSION=3.7
 
 ARG NAME_SPACE
 
-FROM registry.cn-shanghai.aliyuncs.com/${NAME_SPACE}/cuda_docker_base:${PYTHON_VERSION} as builder
+FROM registry.cn-shanghai.aliyuncs.com/${NAME_SPACE}/suanpan-python-sdk-cuda:${PYTHON_VERSION} as builder
 
 ENV PYPI_MIRROR "https://mirrors.aliyun.com/pypi/simple"
 
@@ -18,7 +18,7 @@ COPY . /build
 
 RUN bash tools/compress.sh
 
-FROM registry.cn-shanghai.aliyuncs.com/${NAME_SPACE}/cuda_docker_base:${PYTHON_VERSION}
+FROM registry.cn-shanghai.aliyuncs.com/${NAME_SPACE}/suanpan-python-sdk-cuda:${PYTHON_VERSION}
 
 WORKDIR /workspace
 
@@ -30,11 +30,11 @@ RUN pip install --upgrade pip
 
 COPY --from=builder /build /workspace
 
-RUN pip install torch==1.3.1 torchvision==0.4.2
+RUN pip install torch==1.4.0 torchvision==0.5.0
 
-RUN pip install cython
+RUN pip install cython pyyaml==5.1
 
-RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install -e detectron2 && pip install -r requirements.txt
+RUN pip install -e fvcore && pip install -e cocoapi/PythonAPI && pip install detectron2 -f https://dl.fbaipublicfiles.com/detectron2/wheels/cu100/index.html && pip install -r requirements.txt
 
 ENTRYPOINT [ "/usr/bin/dumb-init", "--" ]
 
